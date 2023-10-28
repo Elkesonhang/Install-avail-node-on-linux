@@ -1,4 +1,3 @@
-![image](https://github.com/Elkesonhang/Install-avail-node-on-linux/assets/50800858/5f923cf3-02d4-492d-b78e-060beedaaa69)# Install-avail-node-on-linux
 # 在linux上安装avail节点
 
 这是在 Ubuntu 22.04 上安装 Avail Node 的指南。推荐视频：https://youtu.be/HYBzK-jJIeQ
