@@ -1,8 +1,10 @@
 # 在linux上安装avail节点
 
 推荐硬件：
-最低：4GB RAM，2核CPU，20-40GB SSD空间
-推荐：8GB RAM，4核CPU，200-300GB SSD空间
+
+**最低：4GB RAM，2核CPU，20-40GB SSD空间**
+
+**推荐：8GB RAM，4核CPU，200-300GB SSD空间**
 
 这是在 Ubuntu 22.04 上安装 Avail Node 的指南。推荐视频：https://youtu.be/HYBzK-jJIeQ
 
