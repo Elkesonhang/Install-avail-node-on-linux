@@ -1,5 +1,9 @@
 # 在linux上安装avail节点
 
+推荐硬件：
+最低：4GB RAM，2核CPU，20-40GB SSD空间
+推荐：8GB RAM，4核CPU，200-300GB SSD空间
+
 这是在 Ubuntu 22.04 上安装 Avail Node 的指南。推荐视频：https://youtu.be/HYBzK-jJIeQ
 
 **1.安装rust**
@@ -105,5 +109,10 @@
 ![image](https://github.com/Elkesonhang/Install-avail-node-on-linux/assets/50800858/37af05af-80ba-472c-b6df-b52da0cf5f7b)
 
 
-原文连接：https://github.com/DinhCongTac221/Install-Avail-Full-Node
+检查节点同步完成之后，记得填表申请后续的激励测试网，届时会选择200+节点参与！！
+https://docs.availproject.org/operate/system-requirements/
+
+
+项目方文档连接：https://docs.availproject.org/operate/system-requirements/
+教程原文连接：https://github.com/DinhCongTac221/Install-Avail-Full-Node
 
