@@ -112,9 +112,14 @@
 
 
 检查节点同步完成之后，记得填表申请后续的激励测试网，届时会选择200+节点参与！！
+
 https://docs.availproject.org/operate/system-requirements/
 
 
-项目方文档连接：https://docs.availproject.org/operate/system-requirements/
-教程原文连接：https://github.com/DinhCongTac221/Install-Avail-Full-Node
+
+项目方文档连接：
+https://docs.availproject.org/operate/system-requirements/
+
+教程原文连接：
+https://github.com/DinhCongTac221/Install-Avail-Full-Node
 
