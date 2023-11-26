@@ -1,4 +1,4 @@
-# 在linux上安装avail节点
+![image](https://github.com/Elkesonhang/Install-avail-node-on-linux/assets/50800858/80a70d9a-1d07-4b95-8330-fff7c5f81216)# 在linux上安装avail节点
 
 推荐硬件：
 
@@ -26,8 +26,8 @@
     cd avail
     mkdir -p output
     mkdir -p data
-    git checkout v1.7.2
-    cargo run --locked --release -- --chain kate -d ./output
+    git checkout v1.8.0.2
+    cargo run --locked --release -- --chain goldberg -d ./output
 
 **此命令使你的 Avail Node 连接到kate测试网**
 
@@ -81,7 +81,7 @@
     StartLimitIntervalSec=0
     [Service] 
     User=root 
-    ExecStart= /root/avail/target/release/data-avail --base-path `pwd`/data --chain kate --name "Elkeson"
+    ExecStart= /root/avail/target/release/data-avail --base-path `pwd`/data --chain goldberg --name "Elkeson"
     Restart=always 
     RestartSec=120
     [Install] 
@@ -109,6 +109,89 @@
 
 在 https://telemetry.avail.tools/ 上检查您的节点
 ![image](https://github.com/Elkesonhang/Install-avail-node-on-linux/assets/50800858/37af05af-80ba-472c-b6df-b52da0cf5f7b)
+
+
+**5.从kate网络升级到goldberg网络**
+    sudo systemctl stop availd.service
+    cd
+    cd avail
+    git pull
+    git checkout
+    git checkout v1.8.0.2
+    cargo run --locked --release -- --chain goldberg -d ./output
+
+打开availd.service并将--chain Kate更改为--Chain Goldberg
+
+    sudo nano /etc/systemd/system/availd.service
+    
+    [Unit] 
+    Description=Avail Validator
+    After=network.target
+    StartLimitIntervalSec=0
+    [Service] 
+    User=root 
+    ExecStart= /root/avail/target/release/data-avail -d ./output --chain goldberg --validator --name "Dinhcongtac221"
+    Restart=always 
+    RestartSec=120
+    [Install] 
+    WantedBy=multi-user.target
+
+Ctrl+O 保存，Ctrl+X 退出。
+![image](https://github.com/Elkesonhang/Install-avail-node-on-linux/assets/50800858/20c6b7d1-e016-4ed3-aa3c-151a7babc1fb)
+
+重启服务
+    sudo systemctl daemon-reload
+    sudo systemctl enable availd.service 
+    sudo service availd start
+    systemctl status availd.service
+
+**5.docker用户将kate升级到goldberg**
+您可以尝试查找容器 ID
+    docker ps -a
+停止节点
+    docker stop <你的容易名字>
+    
+将 DA_NAME=goldberg-docker-avail-Node 更改为您的节点名称并再次运行
+    cd /mnt/avail
+    sudo docker run -v $(pwd)/state:/da/state:rw -v $(pwd)/keystore:/da/keystore:rw -e DA_CHAIN=goldberg -e DA_NAME=goldberg-docker-avail-Node -p 0.0.0.0:30333:30333 -p 9615:9615 -p 9944:9944 -d --restart unless-stopped availj/avail:v1.8.0.2
+
+
+**6.通过预构建完成kate到goldberg的升级**
+
+    sudo systemctl stop availd.service 
+    cd /root/avail-node/
+    rm data-avail-linux-amd64
+    rm data-avail-linux-amd64.tar.gz
+    wget https://github.com/availproject/avail/releases/download/v1.8.0.2/data-avail-linux-amd64.tar.gz
+    tar xvzf data-avail-linux-amd64.tar.gz
+
+打开文件 Systemd 并编辑为 --chain goldberg
+
+    nano /etc/systemd/system/availd.service
+    
+    [Unit]
+    Description=Avail Validator
+    After=network.target
+    StartLimitIntervalSec=0
+    
+    [Service]
+    User=root
+    Type=simple
+    Restart=always
+    RestartSec=120
+    ExecStart=/root/avail-node/data-avail-linux-amd64 -d ./output --chain goldberg --port 30333 --validator --name "dinhcongac221"
+    
+    [Install]
+    WantedBy=multi-user.target
+
+CTRL + o 保存。 Ctrl +X 退出
+
+再次重启systemd文件
+
+    sudo systemctl daemon-reload
+    sudo systemctl enable availd.service
+    sudo systemctl restart availd.service
+    sudo systemctl status availd.service
 
 
 检查节点同步完成之后，记得填表申请后续的激励测试网，届时会选择200+节点参与！！
