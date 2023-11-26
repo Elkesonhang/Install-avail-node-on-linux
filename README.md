@@ -112,6 +112,7 @@
 
 
 **5.从kate网络升级到goldberg网络**
+
     sudo systemctl stop availd.service
     cd
     cd avail
@@ -140,18 +141,24 @@ Ctrl+O 保存，Ctrl+X 退出。
 ![image](https://github.com/Elkesonhang/Install-avail-node-on-linux/assets/50800858/20c6b7d1-e016-4ed3-aa3c-151a7babc1fb)
 
 重启服务
+
     sudo systemctl daemon-reload
     sudo systemctl enable availd.service 
     sudo service availd start
     systemctl status availd.service
 
 **5.docker用户将kate升级到goldberg**
+
 您可以尝试查找容器 ID
+
     docker ps -a
+    
 停止节点
+
     docker stop <你的容易名字>
     
 将 DA_NAME=goldberg-docker-avail-Node 更改为您的节点名称并再次运行
+
     cd /mnt/avail
     sudo docker run -v $(pwd)/state:/da/state:rw -v $(pwd)/keystore:/da/keystore:rw -e DA_CHAIN=goldberg -e DA_NAME=goldberg-docker-avail-Node -p 0.0.0.0:30333:30333 -p 9615:9615 -p 9944:9944 -d --restart unless-stopped availj/avail:v1.8.0.2
 
